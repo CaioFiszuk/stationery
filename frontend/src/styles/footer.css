@@ -1,0 +1,11 @@
+.footer {
+    background-color: rgb(138, 227, 48);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.footer__paragraph {
+    text-align: center;
+}

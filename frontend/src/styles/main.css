@@ -1,0 +1,31 @@
+.main {
+    display: flex;
+    gap: 20px;
+}
+
+.main__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 60px auto;
+}
+
+.main__item-image {
+    width: 200px;
+    height: 200px;
+}
+
+.main__item-button {
+    border: none;
+    border-radius: 20px;
+    background-color: royalblue;
+    color: lavender;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.main__item-button:hover {
+    background-color: rgb(51, 81, 172);
+}

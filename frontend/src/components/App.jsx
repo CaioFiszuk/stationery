@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import Header from './Header';
+import Footer from './Footer';
 import Main from "./Main";
 import Dashboard from "./Dashboard";
 import { useEffect, useState } from "react";
@@ -26,7 +28,13 @@ function App() {
       <Routes>
         <Route 
           path="/"
-          element={<Main products={products}/>}
+          element={
+            <>
+             <Header />
+             <Main products={products}/>
+             <Footer />
+            </>
+          }
         />
 
         <Route 

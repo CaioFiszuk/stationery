@@ -28,7 +28,9 @@ module.exports.createProduct = async (req, res) => {
 
 module.exports.getAllProducts = async (req, res) => {
    try {
-     const data = await Product.find({});
+     const data = await Product.find({}).limit(5);
+
+     //.sort({ createdAt: -1 })
 
       return res.status(200).send(data);
    }catch(error) {

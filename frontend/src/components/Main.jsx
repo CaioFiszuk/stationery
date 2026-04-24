@@ -1,13 +1,15 @@
 function Main({products}) {
 
   return (
-    <main>
+    <main className="main">
        {
          products.map((product=>(
-          <div>
+          <section className="main__item">
             <h2>{product.productName}</h2>
-            <hr />
-          </div>
+            <img src={product.images} alt={product.slug} className="main__item-image"/>
+            <span><strong>Preço: R$ 9,99</strong></span>
+            <button className="main__item-button">Adicionar ao carrinho</button>
+          </section>
          )))
        }
     </main>

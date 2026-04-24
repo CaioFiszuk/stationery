@@ -1,0 +1,44 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(138, 227, 48);
+    padding: 15px;
+}
+
+.header__logo {
+    width: 150px;
+    height: 150px;
+}
+
+.header__nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.header__menu {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+}
+
+.header__menu-item {
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 23px;
+}
+
+.header__icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.header__menu-item:hover {
+    color: navy;
+}
+
+.header__icon:hover {
+    color: navy;
+}
