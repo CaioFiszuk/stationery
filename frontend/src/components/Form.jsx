@@ -17,10 +17,12 @@ function Form({handleSubmitForm}) {
     };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="form">
+      <legend className="form__title">Adicionar Produto</legend>
        <input 
           type="text" 
           placeholder="Nome do produto"
+          className="form__input"
           name='productName'
           value={productName} 
           onChange={(e) => {
@@ -32,6 +34,7 @@ function Form({handleSubmitForm}) {
         <input 
           type="text" 
           placeholder="Slug"
+          className="form__input"
           name='slug'
           value={slug} 
           onChange={(e) => {
@@ -43,6 +46,7 @@ function Form({handleSubmitForm}) {
         <input 
            type="text" 
            placeholder="Descrição"
+           className="form__input"
            name='description'
            value={description} 
            onChange={(e) => {
@@ -54,6 +58,7 @@ function Form({handleSubmitForm}) {
         <input 
            type="number" 
            placeholder="Preço"
+           className="form__input"
            name='price'
            value={price} 
            onChange={(e) => {
@@ -64,6 +69,7 @@ function Form({handleSubmitForm}) {
 
         <select
           value={category}
+          className="form__input"
           onChange={(e) => {
             setCategory(e.target.value);
           }}
@@ -81,6 +87,7 @@ function Form({handleSubmitForm}) {
         <input 
            type="text" 
            placeholder="Marca"
+           className="form__input"
            name='brand'
            value={brand} 
            onChange={(e) => {
@@ -92,14 +99,21 @@ function Form({handleSubmitForm}) {
         <input 
           type="text"
           placeholder="Imagem"
+          className="form__input"
           name='images'
           value={images} 
           onChange={(e) => {
             setImages(e.target.value);
           }}
+          required
         />
 
-        <button type="submit">Adicionar</button>
+        <button 
+          type="submit"
+          className="form__button"
+        >
+          Adicionar
+        </button>
     </form>
   )
 }
