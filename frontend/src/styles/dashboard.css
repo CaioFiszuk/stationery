@@ -1,3 +1,9 @@
+.dashboard__functions {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
 .dashboard__table {
     width: 100%;
     margin: 50px auto;
@@ -24,7 +30,7 @@
 }
 
 .dashboard__button:hover {
-    background-color: rgb(41, 66, 141);
+    opacity: 0.6;
 }
 
 .dashboard__table-button {

@@ -39,5 +39,17 @@
 }
 
 .form__button:hover {
-    background-color: rgb(41, 66, 141);
+    opacity: 0.6;
+}
+
+.green-button {
+  background-color: forestgreen;
+}
+
+.red-button {
+  background-color: red;
+}
+
+.big-font {
+    font-size: 25px;
 }

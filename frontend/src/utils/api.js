@@ -48,6 +48,18 @@ async getProducts() {
   }
 }
 
+async deleteProduct(id) {
+  try {
+    const res = await axios.delete(`${this.baseURL}/products/${id}`);
+    return res.data;
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      throw new Error(this.handleError(err));
+    }
+    throw new Error("Erro inesperado.");
+  }
+}
+
 }
 
 export const api = new Api({
