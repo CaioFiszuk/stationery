@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 function Dashboard({products, setProducts}) {
   const [createModal, setCreateModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
+  const [updateModal, setUpdateModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const openCreateModal = () => {
@@ -29,14 +30,23 @@ function Dashboard({products, setProducts}) {
     setDeleteModal(false);
   }
 
+    const openUpdateModal = (product) => {
+    setSelectedProduct(product);
+    setUpdateModal(true);
+  }
+
+  const closeUpdateModal = () => {
+    setUpdateModal(false);
+  }
+
   const handleCreateProduct =  async (data) => {
     try {
       const newProduct = await api.createProduct(data);
-        const dadoWithData = {
+        const productWithData = {
         _id: newProduct._id,
         ...data
       };
-      setProducts(prev => [...prev, dadoWithData]);
+      setProducts(prev => [...prev, productWithData]);
       closeCreateModal();
     } catch(error) {
       console.error(error);
@@ -50,6 +60,21 @@ function Dashboard({products, setProducts}) {
       await api.deleteProduct(selectedProduct._id)
       setProducts(prev => prev.filter(prod => prod._id !== selectedProduct._id));
       closeDeleteModal();
+    } catch(error) {
+      console.error(error);
+    }
+  }
+
+  const handleUpdateProduct = async (data) => {
+      if (!selectedProduct) return;
+
+      try {
+      const response = await api.updateProduct(selectedProduct._id, data);
+      setProducts((prev) => {
+       return prev.map(prod => prod._id === selectedProduct._id ? response : prod);  
+      });
+
+      closeUpdateModal();
     } catch(error) {
       console.error(error);
     }
@@ -90,7 +115,10 @@ function Dashboard({products, setProducts}) {
                    <td className="dashboard__cell">{product.description}</td>
                    <td className="dashboard__cell">{product.countInStock}</td>
                    <td className="dashboard__cell">
-                    <button className="dashboard__table-button green-button">
+                    <button 
+                      className="dashboard__table-button green-button"
+                      onClick={() => openUpdateModal(product)}
+                    >
                       <FaPencilAlt className="dashboard__button-icon"/>
                     </button>
                    </td>
@@ -109,7 +137,11 @@ function Dashboard({products, setProducts}) {
         </table>
 
         <Popup isOpen={createModal} onClose={closeCreateModal}>
-          <Form handleSubmitForm={handleCreateProduct}/>
+          <Form 
+            handleSubmitForm={handleCreateProduct} 
+            formName={"Adicionar Produto"}
+            buttonTitle={"Adicionar Produto"}
+          />
         </Popup>
 
         <Popup isOpen={deleteModal} onClose={closeDeleteModal}>
@@ -130,6 +162,16 @@ function Dashboard({products, setProducts}) {
               Não
             </button>
           </form>
+        </Popup>
+
+        <Popup isOpen={updateModal} onClose={closeUpdateModal}>
+          <Form 
+            handleSubmitForm={handleUpdateProduct}
+            formName={"Editar Produto"}
+            buttonTitle={"Editar Produto"}
+            initialData={selectedProduct}
+            isEdit={true}
+          />
         </Popup>
     </section>
   )

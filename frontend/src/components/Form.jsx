@@ -1,24 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function Form({handleSubmitForm}) {
+function Form({handleSubmitForm, formName, buttonTitle, initialData, isEdit}) {
     const [productName, setProductName] = useState("");
     const [slug, setSlug] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState(0);
     const [category, setCategory] = useState("");
     const [brand, setBrand] = useState("");
+    const [countInStock, setCountInStock] = useState(0);
     const [images, setImages] = useState("");
 
     const handleSubmit =  async (e) => {
      e.preventDefault();
 
-     await handleSubmitForm({productName, slug, description, price, category, brand, images});
+     await handleSubmitForm({productName, slug, description, price, category, brand, countInStock, images});
     
     };
 
+    useEffect(() => {
+      if (initialData) {
+        setProductName(initialData.productName || "");
+        setSlug(initialData.slug || "");
+        setDescription(initialData.description || "");
+        setPrice(initialData.price || "");
+        setCategory(initialData.category || "");
+        setBrand(initialData.brand || "");
+        setCountInStock(initialData.countInStockstock || 0);
+        setImages(initialData.images || "");
+      }
+    }, [initialData]);
+
   return (
     <form onSubmit={handleSubmit} className="form">
-      <legend className="form__title">Adicionar Produto</legend>
+      <legend className="form__title">{formName}</legend>
        <input 
           type="text" 
           placeholder="Nome do produto"
@@ -96,6 +110,20 @@ function Form({handleSubmitForm}) {
            required
         />
 
+        {isEdit && (
+         <input 
+           type="number"
+           placeholder="Quantidade em estoque"
+           className="form__input"
+           name="countInStock"
+           value={countInStock}
+           onChange={(e) => {
+           setCountInStock(Number(e.target.value));
+          }}
+          required
+        />
+)}
+
         <input 
           type="text"
           placeholder="Imagem"
@@ -112,7 +140,7 @@ function Form({handleSubmitForm}) {
           type="submit"
           className="form__button"
         >
-          Adicionar
+          {buttonTitle}
         </button>
     </form>
   )

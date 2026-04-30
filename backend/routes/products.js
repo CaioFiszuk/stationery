@@ -17,6 +17,6 @@ router.get('/product', protect, getProductByName);
 router.get('/category', protect, getProductBCategory);
 router.get('/:productId', protect, getProduct);
 router.delete('/:productId', deleteProduct);
-router.patch('/:productId', protect, updateProduct);
+router.patch('/:productId', updateProduct);
 
 module.exports = router;

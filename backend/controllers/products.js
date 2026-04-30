@@ -98,7 +98,7 @@ module.exports.deleteProduct = async (req, res) => {
 
 module.exports.updateProduct = async (req, res) => {
     try {
-    const { productName, slug, description, price, category, brand } = req.body;
+    const { productName, slug, description, price, category, brand, countInStock, images } = req.body;
     const updatedProduct = await Product.findByIdAndUpdate(
      req.params.productId,
      {
@@ -107,14 +107,16 @@ module.exports.updateProduct = async (req, res) => {
        description: description,
        price: price,
        category: category,
-       brand: brand
+       brand: brand,
+       countInStock: countInStock,
+       images: images
      },
      { 
       new: true, 
       runValidators: true, 
     }
     );
-    return res.status(201).send({ updatedProduct });
+    return res.status(200).send(updatedProduct);
    } catch(error) {
       if (error.name === 'CastError') {
         return res.status(400).send({ message: "Invalid product ID format" });

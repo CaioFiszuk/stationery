@@ -42,7 +42,7 @@ async getProducts() {
     return res.data;
   } catch (err) {
     if (axios.isAxiosError(err)) {
-      throw new Error(this.handleError(err));
+      throw new Error(this._handleError(err));
     }
     throw new Error("Erro inesperado.");
   }
@@ -54,7 +54,25 @@ async deleteProduct(id) {
     return res.data;
   } catch (err) {
     if (axios.isAxiosError(err)) {
-      throw new Error(this.handleError(err));
+      throw new Error(this._handleError(err));
+    }
+    throw new Error("Erro inesperado.");
+  }
+}
+
+async updateProduct(id, data) {
+  const { productName, slug, description, price, category, brand, countInStock, images } = data;
+
+  if (!id) {
+    return Promise.reject("O ID é obrigatório.");
+  }
+
+  try {
+    const res = await axios.patch(`${this.baseURL}/products/${id}`, data);
+    return res.data;
+  } catch (err) {
+   if (axios.isAxiosError(err)) {
+      throw new Error(this._handleError);
     }
     throw new Error("Erro inesperado.");
   }
