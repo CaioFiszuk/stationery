@@ -1,0 +1,38 @@
+.productList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.productList__title {
+    text-align: center;
+    margin: 30px 0 20px;
+    font-size: 30px;
+    line-height: 35px;
+}
+
+.productList__image {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 20px;
+}
+
+.productList__description {
+    font-size: 20px;
+    line-height: 25px;
+}
+
+.productList__button {
+    margin: 20px 0 10px;
+    border: none;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: royalblue;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.productList__button:hover {
+    opacity: 0.8;
+}

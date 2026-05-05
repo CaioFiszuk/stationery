@@ -1,9 +1,11 @@
 function Main({products}) {
 
+  const limitedProducts = products.slice(0, 5);
+
   return (
     <main className="main">
        {
-         products.map((product=>(
+         limitedProducts.map((product=>(
           <section className="main__item">
             <h2>{product.productName}</h2>
             <img src={product.images} alt={product.slug} className="main__item-image"/>

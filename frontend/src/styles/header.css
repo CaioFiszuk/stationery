@@ -24,6 +24,8 @@
 }
 
 .header__menu-item {
+    text-decoration: none;
+    color: black;
     cursor: pointer;
     font-size: 18px;
     line-height: 23px;

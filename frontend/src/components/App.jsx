@@ -3,6 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Main from "./Main";
 import Dashboard from "./Dashboard";
+import ProductsList from "./ProductList";
 import { useEffect, useState } from "react";
 import { api } from "../utils/api";
 
@@ -40,6 +41,17 @@ function App() {
         <Route 
           path="/dashboard"
           element={<Dashboard products={products} setProducts={setProducts}/>}
+        />
+
+        <Route 
+         path="/products"
+         element={
+         <>
+          <Header />
+          <ProductsList products={products}/>
+          <Footer />
+         </>
+         }
         />
       </Routes>
     </section>

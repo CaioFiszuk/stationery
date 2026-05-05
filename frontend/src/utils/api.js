@@ -7,14 +7,19 @@ class Api {
   }
 
 
-  _handleError() {
-    if (error.response) {
-      return `Error: ${error.response.status} - ${
-        error.response.data?.message || error.message
-      }`;
-    }
-    return `Network error: ${error.message}`;
+_handleError(error) {
+  if (error.response) {
+    return `Error ${error.response.status}: ${
+      error.response.data?.message || JSON.stringify(error.response.data)
+    }`;
   }
+
+  if (error.request) {
+    return "Sem resposta do servidor.";
+  }
+
+  return `Erro: ${error.message}`;
+}
 
 async createProduct(data) {
   const { productName, slug, description, price, category, brand, images } = data;
@@ -28,18 +33,23 @@ async createProduct(data) {
     return res.data;
   } catch (err) {
    if (axios.isAxiosError(err)) {
-      throw new Error(this._handleError);
+      throw new Error(this._handleError(err));
     }
     throw new Error("Erro inesperado.");
   }
 }
 
-async getProducts() {
+async getProducts(category) {
   try {
-    const res = await axios.get(`${this.baseURL}/products`, {
+    const url = category
+    ? `${this.baseURL}/products?category=${category}`
+    : `${this.baseURL}/products`;
+
+    const res = await axios.get(url, {
       headers: this.headers,
     });
     return res.data;
+
   } catch (err) {
     if (axios.isAxiosError(err)) {
       throw new Error(this._handleError(err));

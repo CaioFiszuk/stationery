@@ -26,18 +26,6 @@ module.exports.createProduct = async (req, res) => {
   
 };
 
-module.exports.getAllProducts = async (req, res) => {
-   try {
-     const data = await Product.find({}).limit(5);
-
-     //.sort({ createdAt: -1 })
-
-      return res.status(200).send(data);
-   }catch(error) {
-     res.status(500).send({ message: "Server Error" + error })
-   }
-}
-
 module.exports.getProduct = async (req, res) => {
     try {
      const { productId } = req.params;
@@ -52,23 +40,12 @@ module.exports.getProduct = async (req, res) => {
    }
 }
 
-module.exports.getProductByName = async (req, res) => {
+module.exports.getAllProducts = async (req, res) => {
     try {
-     const { productName } = req.body;
-     const data = await Product.find({
-        productName: { $regex: productName, $options: 'i' }
-    });
+     const { category } = req.query;
+     const filter = category ? { category } : {};
 
-     return res.status(200).send(data);
-   } catch(error) {
-     res.status(500).send({ message: "Server Error" + error })
-   }
-}
-
-module.exports.getProductBCategory = async (req, res) => {
-    try {
-     const { category } = req.body;
-     const data = await Product.find({category});
+     const data = await Product.find(filter);
 
      return res.status(200).send(data);
    } catch(error) {
