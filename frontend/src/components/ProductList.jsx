@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import { api } from "../utils/api";
 
 function ProductsList() {
@@ -28,6 +28,7 @@ function ProductsList() {
             <span className="productList__description"><em>{product.brand}</em></span>
             <span className="productList__description"><strong>Preço: R$ {product.price.toFixed(2)}</strong></span>
             <button className="productList__button">Adicionar ao carrinho</button>
+            <Link to={`/product/${product._id}`}>Ver Detalhes</Link>
           </section>
          )))
        }

@@ -4,6 +4,7 @@ import Footer from './Footer';
 import Main from "./Main";
 import Dashboard from "./Dashboard";
 import ProductsList from "./ProductList";
+import ProductView from "./ProductView";
 import { useEffect, useState } from "react";
 import { api } from "../utils/api";
 
@@ -52,6 +53,17 @@ function App() {
           <Footer />
          </>
          }
+        />
+
+        <Route 
+          path="/product/:productId"
+          element={
+            <>
+              <Header />
+              <ProductView />
+              <Footer />
+            </>
+          }
         />
       </Routes>
     </section>

@@ -58,6 +58,21 @@ async getProducts(category) {
   }
 }
 
+async getOneProduct(id) {
+  try {
+    const res = await axios.get(`${this.baseURL}/products/${id}`, {
+      headers: this.headers,
+    });
+    return res.data;
+
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      throw new Error(this._handleError(err));
+    }
+    throw new Error("Erro inesperado.");
+  }
+}
+
 async deleteProduct(id) {
   try {
     const res = await axios.delete(`${this.baseURL}/products/${id}`);
